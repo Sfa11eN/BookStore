@@ -16,20 +16,20 @@ public class BookServiceImpl implements BookService {
     @Override
     public void addBook(Book book) {
         if (book.getPrice() < 0) {
-            logger.error("Price cannot be negative");
-            throw new IllegalArgumentException("Price cannot be negative");
+            logger.error("Цена не может быть отрицательной");
+            throw new IllegalArgumentException("Цена не может быть отрицательной");
         }
         books.put(book.getId(), book);
-        logger.info("Book added: {}", book);
+        logger.info("Книга добавлена: {}", book);
     }
 
     @Override
     public Book getBookById(int id) {
         Book book = books.get(id);
         if (book != null) {
-            logger.info("Book found: {}", book);
+            logger.info("Книга получена: {}", book);
         } else {
-            logger.warn("Book with id {} not found", id);
+            logger.warn("Книга с id {} не найдена", id);
         }
         return book;
     }
@@ -37,7 +37,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getAllBooks() {
         List<Book> allBooks = new ArrayList<>(books.values());
-        logger.info("Retrieved all books: {}", allBooks);
+        logger.info("Извлеченные книги: {}", allBooks);
         return allBooks;
     }
 
@@ -45,10 +45,10 @@ public class BookServiceImpl implements BookService {
     public void updateBook(Book book) {
         if (books.containsKey(book.getId())) {
             books.put(book.getId(), book);
-            logger.info("Book updated: {}", book);
+            logger.info("Книга обновлена: {}", book);
         } else {
-            logger.error("Book with id {} does not exist", book.getId());
-            throw new IllegalArgumentException("Book with id " + book.getId() + " does not exist");
+            logger.error("Книга с id {} не найдена", book.getId());
+            throw new IllegalArgumentException("Книга с id" + book.getId() + " не найдена");
         }
     }
 
@@ -56,9 +56,9 @@ public class BookServiceImpl implements BookService {
     public void deleteBook(int id) {
         Book removedBook = books.remove(id);
         if (removedBook != null) {
-            logger.info("Book deleted: {}", removedBook);
+            logger.info("Книга удалена: {}", removedBook);
         } else {
-            logger.warn("Book with id {} not found", id);
+            logger.warn("Книга с id {} не найдена", id);
         }
     }
 }
